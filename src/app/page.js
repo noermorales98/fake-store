@@ -79,6 +79,7 @@ export default function Home() {
                 title={product.title}
                 category={product.category}
                 price={product.price}
+                id={product.id}
               />
             );
           })}
