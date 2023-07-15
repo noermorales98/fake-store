@@ -1,7 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
-export default function CardProducts({ image, title, category, price, rate }) {
-    const titulo = title.split(" ").slice(0, 4).join(" ");
+export default function CardProducts({ image, title, category, price, id }) {
+  const titulo = title.split(" ").slice(0, 4).join(" ");
   return (
     <div className="!z-5 m-auto relative flex flex-col rounded-[20px] max-w-[300px] bg-white border-gray-100 border-2 bg-clip-border shadow-3xl shadow-shadow-500 w-full !p-4 3xl:p-![18px]">
       <div className="h-full w-full flex flex-col justify-between">
@@ -29,12 +30,13 @@ export default function CardProducts({ image, title, category, price, rate }) {
                 {price} <span>USD</span>
               </p>
             </div>
-            <button
-              href=""
-              className="linear rounded-[20px] bg-blue-600 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700"
-            >
-              Ver producto
-            </button>
+            <Link href={`/products/${id}`}>
+              <button
+                className="linear rounded-[20px] bg-blue-600 px-4 py-2 text-base font-medium text-white transition duration-200 hover:bg-brand-800 active:bg-brand-700"
+              >
+                Ver producto
+              </button>
+            </Link>
           </div>
         </div>
       </div>

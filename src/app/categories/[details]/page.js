@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 
 export default function Page({ params }) {
   const { details } = params;
-  console.log(details);
-
   const [productsData, setProductsData] = useState([]);
   useEffect(() => {
     getProductsByCategory(details)
