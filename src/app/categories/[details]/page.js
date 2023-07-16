@@ -21,7 +21,13 @@ export default function Page({ params }) {
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl m-auto py-20">
+        <div>
+          <div className="flex max-w-7xl m-auto">
+            <h1 className="text-3xl font-semibold text-gray-800 py-6">
+              Resultados de la categoría: {decodeURIComponent(details)}
+            </h1>
+          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl m-auto pb-20">
           {productsData.map((product) => (
             <CardProducts
               key={product.id}
@@ -33,6 +39,7 @@ export default function Page({ params }) {
               image={product.image}
             />
           ))}
+        </div>
         </div>
       )}
     </section>
