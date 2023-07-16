@@ -1,76 +1,26 @@
-// "use client";
-// import React, { useState } from 'react';
-// import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-// import { Menu } from 'antd';
-// const items = [
-//   {
-//     label: 'Navigation One',
-//     key: 'mail',
-//     icon: <MailOutlined />,
-//   },
-//   {
-//     label: 'Navigation Two',
-//     key: 'app',
-//     icon: <AppstoreOutlined />,
-//     disabled: true,
-//   },
-//   {
-//     label: 'Navigation Three - Submenu',
-//     key: 'SubMenu',
-//     icon: <SettingOutlined />,
-//     children: [
-//       {
-//         type: 'group',
-//         label: 'Item 1',
-//         children: [
-//           {
-//             label: 'Option 1',
-//             key: 'setting:1',
-//           },
-//           {
-//             label: 'Option 2',
-//             key: 'setting:2',
-//           },
-//         ],
-//       },
-//       {
-//         type: 'group',
-//         label: 'Item 2',
-//         children: [
-//           {
-//             label: 'Option 3',
-//             key: 'setting:3',
-//           },
-//           {
-//             label: 'Option 4',
-//             key: 'setting:4',
-//           },
-//         ],
-//       },
-//     ],
-//   },
-//   {
-//     label: (
-//       <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-//         Navigation Four - Link
-//       </a>
-//     ),
-//     key: 'alipay',
-//   },
-// ];
-// const Navbar = () => {
-//   const [current, setCurrent] = useState('mail');
-//   const onClick = (e) => {
-//     console.log('click ', e);
-//     setCurrent(e.key);
-//   };
-//   return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
-// };
-// export default Navbar;
-
+"use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Navbar() {
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    search: "",
+  });
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const dato = formData.search;
+    if (formData.search === "") return;
+    setFormData({ search: "" });
+    router.push(`/products/search/${dato}`);
+  };
+
   return (
     <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20">
       {/* logo */}
@@ -85,23 +35,19 @@ export default function Navbar() {
       <div className="hidden sm:block flex-shrink flex-grow-0 justify-start px-2">
         <div className="inline-block">
           <div className="inline-flex items-center max-w-full">
-            {/* <button className="flex items-center flex-grow-0 flex-shrink pl-2 relative w-60 border rounded-full px-1  py-1" type="button">
-                <div className="block flex-grow flex-shrink overflow-hidden">Empieza tu búsqueda</div>
-                <div className="flex items-center justify-center relative  h-8 w-8 rounded-full">
-                  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', fill: 'none', height: '12px', width: '12px', stroke: 'currentcolor', strokeWidth: '5.33333', overflow: 'visible'}}>
-                    <g fill="none">
-                      <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9" />
-                    </g>
-                  </svg>
-                </div>
-              </button> */}
             <div className="flex-grow flex flex-row items-center justify-center flex-shrink rounded-l-full rounded-r-full border border-gray-200 px-3 py-2">
               <input
                 className="pl-2 w-48 border-none outline-none bg-transparent text-gray-700 placeholder-gray-400"
                 type="text"
+                name="search"
+                onChange={(e) => onChange(e)}
+                value={formData.search}
                 placeholder="Empieza tu búsqueda"
               />
-              <button className="flex items-center justify-center relative bg-blue-500  h-8 w-8 rounded-full">
+              <button
+                onClick={handleOnSubmit}
+                className="flex items-center justify-center relative bg-blue-500  h-8 w-8 rounded-full"
+              >
                 <svg
                   viewBox="0 0 32 32"
                   xmlns="http://www.w3.org/2000/svg"
