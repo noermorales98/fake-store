@@ -10,6 +10,8 @@ export default function Navbar() {
     search: "",
   });
 
+  const [showDiv, setShowDiv] = useState(false);
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -20,6 +22,15 @@ export default function Navbar() {
     setFormData({ search: "" });
     router.push(`/products/search/${dato}`);
   };
+
+
+  const handleMouseEnter = () => {
+    setShowDiv(true);
+  }
+
+  const handleMouseLeave = () => {
+    setShowDiv(false);
+  }
 
   return (
     <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20">
@@ -113,12 +124,13 @@ export default function Navbar() {
               </button>
             </div>
           </div>
-          <div className="block">
+          <div className="block" onMouseEnter={handleMouseEnter}>
             <div className="inline relative">
               <button
                 type="button"
                 className="inline-flex items-center relative px-2 border rounded-full hover:shadow-lg"
               >
+                {/* aqui va el boton de usuario del navbar */}
                 <div className="pl-1">
                   <svg
                     viewBox="0 0 32 32"
@@ -159,6 +171,25 @@ export default function Navbar() {
                   >
                     <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
                   </svg>
+                </div>
+                <div className="absolute z-50 top-14 w-32 bg-white right-1 rounded-xl shadow-xl">
+                  {/* show this element if handleMouseEnter is true */}
+                  <div onMouseLeave={handleMouseLeave} className={showDiv == true ? "block" : "hidden"}>
+                    <div className="flex items-center">
+                      <ul>
+                        <li>
+                          <Link href={'/products/'} className="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100 rounded-xl">Productos</Link>
+                        </li>
+                        <li>
+                          <Link className="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100 rounded-xl"
+                            href={"/products/crud"}
+                          >
+                            Administrar productos
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </button>
             </div>
