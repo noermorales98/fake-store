@@ -178,7 +178,7 @@ export default function Navbar() {
                     <div className="flex items-center">
                       <ul>
                         <li>
-                          <Link href={'/products/'} className="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100 rounded-xl">Productosss</Link>
+                          <Link href={'/products/'} className="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100 rounded-xl">Productos</Link>
                         </li>
                         <li>
                           <Link className="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100 rounded-xl"
